@@ -10,9 +10,12 @@ import shakeSpeareQuotes from '../../shakeSpearData'
 function App() {
   //>>>>>>>>>>>>STATE<<<<<<<<<<<<<<
   const [timer, setTimer] = useState(30)
+  const [isTimeSelected, setIsTimeSelected] = useState(false)
   const [isEndGame, setIsEndGame] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [randomQuote, setRandomQuote] = useState('')
+  const [usedSwiftIndex, setUsedSwiftIndex] = useState([])
+  const [usedSpeareIndex, setUsedSpeareIndex] = useState([])
   const [isItSwiftOrSpeare, setIsitSwiftOrSpeare] = useState([])
   const [displayedQuotes, setDisplayedQuotes] = useState([])
   const [userGuess, setUserGuess] = useState([])
@@ -24,19 +27,19 @@ function App() {
     apiCalls
       .fetchData('https://taylorswiftapi.herokuapp.com/get-all?album=fearless')
       .then(data => setTaylorSwift(data))
-    }, [])
-    
-    useEffect(() => {
-      if (!isGameStarted) {
+  }, [])
+
+  useEffect(() => {
+    if (!isGameStarted) {
       setTimer(30)
+      setIsTimeSelected(false)
       setIsEndGame(false)
       setIsGameStarted(false)
       setUserGuess([])
       setDisplayedQuotes([])
       setIsitSwiftOrSpeare([])
-      
     }
-   }, [isGameStarted])
+  }, [isGameStarted])
 
   useEffect(() => {
     if (timer <= 0) {
@@ -64,18 +67,23 @@ function App() {
   }, [isEndGame])
 
   const swiftOrSpeare = () => {
-    let swift = Math.floor(Math.random() * 10)
-    let speare = Math.floor(Math.random() * 10)
+    let swift = getRandomNumber(10)
+    let speare = getRandomNumber(10)
     if (swift > speare) {
-      let index = Math.floor(Math.random() * 20)
+      let index = getRandomNumber(20)
       setRandomQuote(taylorSwift[index].quote)
       setIsitSwiftOrSpeare(past => [...past, 'Swift'])
       cleanQuote(index)
     } else {
-      let index = Math.floor(Math.random() * shakeSpeare.length)
+      let index = getRandomNumber(shakeSpeare.length)
       setRandomQuote(shakeSpeare[index])
       setIsitSwiftOrSpeare(past => [...past, 'Speare'])
     }
+  }
+
+  const getRandomNumber = length => {
+    let index = Math.floor(Math.random() * shakeSpeare.length)
+    return index
   }
 
   const cleanQuote = index => {
@@ -107,22 +115,54 @@ function App() {
           path='/'
           element={
             <div>
-              <button
-                onClick={() => {
-                  console.log('hi')
-                  setTimer(10)
-                }}
-              >
-                10 seconds
-              </button>
-              <button onClick={() => setTimer(20)}>20 seconds</button>
-              <button onClick={() => setTimer(30)}>30 seconds</button>
+              <div class='e-btn-group'>
+                <input
+                  type='radio'
+                  id='radioleft'
+                  name='align'
+                  value='left'
+                  onClick={() => {
+                    setIsTimeSelected(true)
+                    setTimer(10)
+                  }}
+                />
+                <label class='e-btn' for='radioleft'>
+                  10 Seconds
+                </label>
+                <input
+                  type='radio'
+                  id='radiomiddle'
+                  name='align'
+                  value='middle'
+                  onClick={() => {
+                    setIsTimeSelected(true)
+                    setTimer(20)
+                  }}
+                />
+                <label class='e-btn' for='radiomiddle'>
+                  20 Seconds
+                </label>
+                <input
+                  type='radio'
+                  id='radioright'
+                  name='align'
+                  value='right'
+                  onClick={() => {
+                    setIsTimeSelected(true)
+                    setTimer(30)
+                  }}
+                />
+                <label class='e-btn' for='radioright'>
+                  30 Seconds
+                </label>
+              </div>
               <Link to='/game-begin'>
                 <button
                   onClick={() => {
                     swiftOrSpeare()
                     setIsGameStarted(true)
                   }}
+                  disabled={!isTimeSelected}
                 >
                   Start Game
                 </button>
