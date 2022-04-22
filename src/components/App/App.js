@@ -2,7 +2,7 @@
 import './App.css'
 import React, { useEffect, useState } from 'react'
 import apiCalls from '../../apiCalls'
-import { Route, Routes, Switch, Link, useNavigate } from 'react-router-dom'
+import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import GameScreen from '../GameScreen/GameScreen'
 import EndGame from '../End Game/EndGame'
 import shakeSpeareQuotes from '../../shakeSpearData'
@@ -14,20 +14,41 @@ function App() {
   const [isEndGame, setIsEndGame] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [randomQuote, setRandomQuote] = useState('')
-  const [usedSwiftIndex, setUsedSwiftIndex] = useState([])
-  const [usedSpeareIndex, setUsedSpeareIndex] = useState([])
+  // const [usedSwiftIndex, setUsedSwiftIndex] = useState([])
+  // const [usedSpeareIndex, setUsedSpeareIndex] = useState([])
   const [isItSwiftOrSpeare, setIsitSwiftOrSpeare] = useState([])
   const [displayedQuotes, setDisplayedQuotes] = useState([])
   const [userGuess, setUserGuess] = useState([])
   const [taylorSwift, setTaylorSwift] = useState([])
+  const [taylorSwiftUsableQuotes, setTaylorSwiftUsableQuotes] = useState([])
+  const [speareUsableQuotes, setSpeareUsableQuotes] = useState([
+    ...shakeSpeareQuotes
+  ])
   const [shakeSpeare, setShakeSpeare] = useState(shakeSpeareQuotes)
 
   //>>>>>>>USEEFECT>><<<<<<<<<<<<
   useEffect(() => {
     apiCalls
       .fetchData('https://taylorswiftapi.herokuapp.com/get-all?album=fearless')
-      .then(data => setTaylorSwift(data))
+      .then(data => {
+        setTaylorSwift(data)
+      })
   }, [])
+
+  useEffect(() => {
+    if (!isGameStarted) {
+      let cleanedQuotes = []
+      taylorSwift.forEach(tquote => {
+        if (tquote.quote.includes('/')) {
+          let cleaned = tquote.quote.replace(/\//g, '')
+          cleanedQuotes.push(cleaned)
+        } else {
+          cleanedQuotes.push(tquote.quote)
+        }
+      })
+      setTaylorSwiftUsableQuotes([...cleanedQuotes])
+    }
+  }, [taylorSwift, isGameStarted])
 
   useEffect(() => {
     if (!isGameStarted) {
@@ -38,6 +59,7 @@ function App() {
       setUserGuess([])
       setDisplayedQuotes([])
       setIsitSwiftOrSpeare([])
+      setSpeareUsableQuotes([...shakeSpeare])
     }
   }, [isGameStarted])
 
@@ -69,29 +91,40 @@ function App() {
   const swiftOrSpeare = () => {
     let swift = getRandomNumber(10)
     let speare = getRandomNumber(10)
+    let randomSelectedQuote
     if (swift > speare) {
-      let index = getRandomNumber(20)
-      setRandomQuote(taylorSwift[index].quote)
+      let index = getRandomNumber(taylorSwiftUsableQuotes.length)
+      // randomSelectedQuote = taylorSwiftUsableQuotes[index]
+      setRandomQuote(taylorSwiftUsableQuotes[index])
       setIsitSwiftOrSpeare(past => [...past, 'Swift'])
-      cleanQuote(index)
+      // cleanQuote(index)
+      // console.log(randomSelectedQuote)
+      // if (index) {
+
+      taylorSwiftUsableQuotes.splice(index, 1)
+      // console.log(taylorSwiftUsableQuotes)
+      // console.log(taylorSwift)
+      // setTaylorSwiftUsableQuotes(newQuotes)
+      // }
     } else {
-      let index = getRandomNumber(shakeSpeare.length)
-      setRandomQuote(shakeSpeare[index])
+      let index = getRandomNumber(speareUsableQuotes.length)
+      setRandomQuote(speareUsableQuotes[index])
       setIsitSwiftOrSpeare(past => [...past, 'Speare'])
+      speareUsableQuotes.splice(index, 1)
     }
   }
 
   const getRandomNumber = length => {
-    let index = Math.floor(Math.random() * shakeSpeare.length)
+    let index = Math.floor(Math.random() * length)
     return index
   }
 
-  const cleanQuote = index => {
-    if (taylorSwift[index].quote.includes('/')) {
-      let cleaned = taylorSwift[index].quote.replace(/\//g, '')
-      setRandomQuote(cleaned)
-    }
-  }
+  // const cleanQuote = index => {
+  //   if (taylorSwift[index].quote.includes('/')) {
+  //     let cleaned = taylorSwift[index].quote.replace(/\//g, '')
+  //     setRandomQuote(cleaned)
+  //   }
+  // }
 
   return (
     <div className='App'>
@@ -103,7 +136,7 @@ function App() {
           element={
             <div>
               <h3>Select your time</h3>
-              <div class='e-btn-group'>
+              <div className='e-btn-group'>
                 <input
                   type='radio'
                   id='radioleft'
@@ -114,7 +147,7 @@ function App() {
                     setTimer(10)
                   }}
                 />
-                <label class='e-btn' for='radioleft'>
+                <label className='e-btn' for='radioleft'>
                   10 Seconds
                 </label>
                 <input
@@ -127,7 +160,7 @@ function App() {
                     setTimer(15)
                   }}
                 />
-                <label class='e-btn' for='radiomiddle'>
+                <label className='e-btn' for='radiomiddle'>
                   15 Seconds
                 </label>
                 <input
@@ -140,7 +173,7 @@ function App() {
                     setTimer(20)
                   }}
                 />
-                <label class='e-btn' for='radioright'>
+                <label className='e-btn' for='radioright'>
                   20 Seconds
                 </label>
               </div>
@@ -168,6 +201,7 @@ function App() {
               setDisplayedQuotes={setDisplayedQuotes}
               swiftOrSpeare={swiftOrSpeare}
               setUserGuess={setUserGuess}
+              timer={timer}
             />
           }
         />
