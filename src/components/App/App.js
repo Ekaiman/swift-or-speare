@@ -14,8 +14,6 @@ function App() {
   const [isEndGame, setIsEndGame] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [randomQuote, setRandomQuote] = useState('')
-  // const [usedSwiftIndex, setUsedSwiftIndex] = useState([])
-  // const [usedSpeareIndex, setUsedSpeareIndex] = useState([])
   const [isItSwiftOrSpeare, setIsitSwiftOrSpeare] = useState([])
   const [displayedQuotes, setDisplayedQuotes] = useState([])
   const [userGuess, setUserGuess] = useState([])
@@ -94,18 +92,9 @@ function App() {
     let randomSelectedQuote
     if (swift > speare) {
       let index = getRandomNumber(taylorSwiftUsableQuotes.length)
-      // randomSelectedQuote = taylorSwiftUsableQuotes[index]
       setRandomQuote(taylorSwiftUsableQuotes[index])
       setIsitSwiftOrSpeare(past => [...past, 'Swift'])
-      // cleanQuote(index)
-      // console.log(randomSelectedQuote)
-      // if (index) {
-
       taylorSwiftUsableQuotes.splice(index, 1)
-      // console.log(taylorSwiftUsableQuotes)
-      // console.log(taylorSwift)
-      // setTaylorSwiftUsableQuotes(newQuotes)
-      // }
     } else {
       let index = getRandomNumber(speareUsableQuotes.length)
       setRandomQuote(speareUsableQuotes[index])
@@ -118,13 +107,6 @@ function App() {
     let index = Math.floor(Math.random() * length)
     return index
   }
-
-  // const cleanQuote = index => {
-  //   if (taylorSwift[index].quote.includes('/')) {
-  //     let cleaned = taylorSwift[index].quote.replace(/\//g, '')
-  //     setRandomQuote(cleaned)
-  //   }
-  // }
 
   return (
     <div className='App'>
