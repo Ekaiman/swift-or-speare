@@ -7,10 +7,12 @@ const GameScreen = ({
   isItSwiftOrSpeare,
   setDisplayedQuotes,
   swiftOrSpeare,
-  setUserGuess
+  setUserGuess,
+  timer
 }) => {
   return (
     <div>
+      <p>time left :{timer}</p>
       <p>{randomQuote}</p>
       <button
         className='swift-button'
