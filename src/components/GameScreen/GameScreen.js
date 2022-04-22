@@ -3,10 +3,10 @@ import reactRouterDom from 'react-router-dom'
 
 const GameScreen = ({
   randomQuote,
-  isItSwift,
+  isItSwiftOrSpeare,
   setDisplayedQuotes,
   swiftOrSpeare,
-  setGuess
+  setUserGuess
 }) => {
   return (
     <div>
@@ -15,7 +15,7 @@ const GameScreen = ({
         onClick={() => {
           setDisplayedQuotes(previous => [...previous, randomQuote])
           swiftOrSpeare()
-          setGuess(past => [...past, 'Swift'])
+          setUserGuess(past => [...past, 'Swift'])
         }}
       >
         Swift
@@ -24,7 +24,7 @@ const GameScreen = ({
         onClick={() => {
           setDisplayedQuotes(previous => [...previous, randomQuote])
           swiftOrSpeare()
-          setGuess(past => [...past, 'Speare'])
+          setUserGuess(past => [...past, 'Speare'])
         }}
       >
         Speare
