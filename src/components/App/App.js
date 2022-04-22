@@ -95,26 +95,14 @@ function App() {
 
   return (
     <div className='App'>
-      <header className='App-header'>swift or speare</header>
+      <h1 className='App-header'>swift or speare</h1>
       <Routes>
-        <Route
-          exact
-          path='/game-begin'
-          element={
-            <GameScreen
-              randomQuote={randomQuote}
-              isItSwiftOrSpeare={isItSwiftOrSpeare}
-              setDisplayedQuotes={setDisplayedQuotes}
-              swiftOrSpeare={swiftOrSpeare}
-              setUserGuess={setUserGuess}
-            />
-          }
-        />
         <Route
           exact
           path='/'
           element={
             <div>
+              <h3>Select your time</h3>
               <div class='e-btn-group'>
                 <input
                   type='radio'
@@ -136,11 +124,11 @@ function App() {
                   value='middle'
                   onClick={() => {
                     setIsTimeSelected(true)
-                    setTimer(20)
+                    setTimer(15)
                   }}
                 />
                 <label class='e-btn' for='radiomiddle'>
-                  20 Seconds
+                  15 Seconds
                 </label>
                 <input
                   type='radio'
@@ -149,11 +137,11 @@ function App() {
                   value='right'
                   onClick={() => {
                     setIsTimeSelected(true)
-                    setTimer(30)
+                    setTimer(20)
                   }}
                 />
                 <label class='e-btn' for='radioright'>
-                  30 Seconds
+                  20 Seconds
                 </label>
               </div>
               <Link to='/game-begin'>
@@ -168,6 +156,19 @@ function App() {
                 </button>
               </Link>
             </div>
+          }
+        />
+        <Route
+          exact
+          path='/game-begin'
+          element={
+            <GameScreen
+              randomQuote={randomQuote}
+              isItSwiftOrSpeare={isItSwiftOrSpeare}
+              setDisplayedQuotes={setDisplayedQuotes}
+              swiftOrSpeare={swiftOrSpeare}
+              setUserGuess={setUserGuess}
+            />
           }
         />
         <Route
