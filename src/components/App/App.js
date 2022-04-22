@@ -2,18 +2,17 @@
 import './App.css'
 import React, { useEffect, useState } from 'react'
 import apiCalls from '../../apiCalls'
-import { Route, Switch, Link} from 'react-router-dom'
+import { Route, Switch, Link } from 'react-router-dom'
 import GameScreen from '../GameScreen/GameScreen'
 import EndGame from '../End Game/EndGame'
-import { Redirect } from 'react-router-dom'
 
 function App() {
-  let myInterval
-
+  var myInterval
 
   //>>>>>>>>>>>>STATE<<<<<<<<<<<<<<
-  const [timer, setTimer] = useState('')
+  const [timer, setTimer] = useState(30)
   const [endGame, setEndGame] = useState(false)
+  const [isGameStarted, setIsGameStarted] = useState(false)
   const [randomQuote, setRandomQuote] = useState('')
   const [isItSwift, setIsitSwift] = useState()
   const [displayedQuotes, setDisplayedQuotes] = useState([])
@@ -38,53 +37,33 @@ function App() {
     'I like this place and could willingly waste my time in it.'
   ])
 
-
-
-//>>>>>>>USEEFECT>><<<<<<<<<<<<
+  //>>>>>>>USEEFECT>><<<<<<<<<<<<
   useEffect(() => {
     apiCalls
       .fetchData('https://taylorswiftapi.herokuapp.com/get-all?album=fearless')
-      .then(data => setTaylorSwift( data))
+      .then(data => setTaylorSwift(data))
   }, [])
 
   useEffect(() => {
-    // const navigate = useNavigate()
-    if (timer === 0) {
+    if (timer <= 0) {
       setEndGame(true)
-      // return <Redirect to='/game-over' />
-      stopTimer()
+  
     }
   }, [timer])
-  
+
   useEffect(() => {
-    if (endGame) {
-      
+    if (!endGame && isGameStarted) {
+      const interval = setInterval(() => {
+        let newTime = timer - +1
+        setTimer(previousTime => previousTime - 1)
+      }, 1000)
+      return () => clearInterval(interval)
     }
-  }, [endGame])
+  }, [endGame, isGameStarted])
 
-
-
-
-
-  const stopTimer = () => {
-
-    clearInterval(myInterval)
-  }
-
-
-  const timerCountDown = () => {
-    myInterval = setInterval(() => {
-      if (endGame) {
-        clearInterval(myInterval)
-      }
-      setTimer(previousTime => previousTime - 1)
-    }, 1000)
-    return () => clearInterval(myInterval)
-  }
-
-  const swiftOrSpeare = () => { 
-    let swift = 0;
-    let speare = 0;
+  const swiftOrSpeare = () => {
+    let swift = 0
+    let speare = 0
     swift = Math.floor(Math.random() * 10)
     speare = Math.floor(Math.random() * 10)
     if (swift > speare) {
@@ -104,25 +83,25 @@ function App() {
     }
   }
 
-  const cleanQuote = (index) => { 
-    if (taylorSwift[index].quote.includes('/')) { 
-      let cleaned = taylorSwift[index].quote.replace(/\//g, "") 
+  const cleanQuote = index => {
+    if (taylorSwift[index].quote.includes('/')) {
+      let cleaned = taylorSwift[index].quote.replace(/\//g, '')
       setRandomQuote(cleaned)
-    } 
+    }
   }
-
-
-
-
-
 
   return (
     <div className='App'>
       <header className='App-header'>swift or speare</header>
-      {/* {endGame ? <Redirect to='/game-over'>} */}
       <Switch>
         <Route exact path='/game-begin'>
-          <GameScreen randomQuote={randomQuote} isItSwift={isItSwift} setDisplayedQuotes={setDisplayedQuotes} swiftOrSpeare={swiftOrSpeare} setGuess={setGuess}/>
+          <GameScreen
+            randomQuote={randomQuote}
+            isItSwift={isItSwift}
+            setDisplayedQuotes={setDisplayedQuotes}
+            swiftOrSpeare={swiftOrSpeare}
+            setGuess={setGuess}
+          />
         </Route>
         <Route exact path='/'>
           <button
@@ -136,10 +115,14 @@ function App() {
           <button onClick={() => setTimer(20)}>20 seconds</button>
           <button onClick={() => setTimer(30)}>30 seconds</button>
           <Link to='/game-begin'>
-            <button onClick={() => {
-              swiftOrSpeare()
-              timerCountDown()
-            }}>Start Game</button>
+            <button
+              onClick={() => {
+                swiftOrSpeare()
+                setIsGameStarted(true)
+              }}
+            >
+              Start Game
+            </button>
           </Link>
         </Route>
         <Route to='game-over'>
