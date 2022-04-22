@@ -1,5 +1,6 @@
 import React from 'react'
 import reactRouterDom from 'react-router-dom'
+import './GameScreen.css'
 
 const GameScreen = ({
   randomQuote,
@@ -12,6 +13,7 @@ const GameScreen = ({
     <div>
       <p>{randomQuote}</p>
       <button
+        className='swift-button'
         onClick={() => {
           setDisplayedQuotes(previous => [...previous, randomQuote])
           swiftOrSpeare()
@@ -20,7 +22,7 @@ const GameScreen = ({
       >
         Swift
       </button>
-      <button
+      <button className='speare-button'
         onClick={() => {
           setDisplayedQuotes(previous => [...previous, randomQuote])
           swiftOrSpeare()
