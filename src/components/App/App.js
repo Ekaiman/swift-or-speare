@@ -23,6 +23,7 @@ function App() {
     ...shakeSpeareQuotes
   ])
   const [shakeSpeare, setShakeSpeare] = useState(shakeSpeareQuotes)
+  const [ranOutOfQuotes, setRanOutOfQuotes] = useState(false)
 
   //>>>>>>>USEEFECT>><<<<<<<<<<<<
   useEffect(() => {
@@ -58,6 +59,7 @@ function App() {
       setDisplayedQuotes([])
       setIsitSwiftOrSpeare([])
       setSpeareUsableQuotes([...shakeSpeare])
+      setRanOutOfQuotes(false)
     }
   }, [isGameStarted])
 
@@ -89,17 +91,23 @@ function App() {
   const swiftOrSpeare = () => {
     let swift = getRandomNumber(10)
     let speare = getRandomNumber(10)
-    let randomSelectedQuote
-    if (swift > speare) {
-      let index = getRandomNumber(taylorSwiftUsableQuotes.length)
-      setRandomQuote(taylorSwiftUsableQuotes[index])
-      setIsitSwiftOrSpeare(past => [...past, 'Swift'])
-      taylorSwiftUsableQuotes.splice(index, 1)
+    if (taylorSwiftUsableQuotes.length > 0 && speareUsableQuotes.length > 0) {
+      if (swift > speare) {
+        let index = getRandomNumber(taylorSwiftUsableQuotes.length)
+        setRandomQuote(taylorSwiftUsableQuotes[index])
+        setIsitSwiftOrSpeare(past => [...past, 'Swift'])
+        taylorSwiftUsableQuotes.splice(index, 1)
+      } else {
+        let index = getRandomNumber(speareUsableQuotes.length)
+        setRandomQuote(speareUsableQuotes[index])
+        setIsitSwiftOrSpeare(past => [...past, 'Speare'])
+        speareUsableQuotes.splice(index, 1)
+      }
     } else {
-      let index = getRandomNumber(speareUsableQuotes.length)
-      setRandomQuote(speareUsableQuotes[index])
-      setIsitSwiftOrSpeare(past => [...past, 'Speare'])
-      speareUsableQuotes.splice(index, 1)
+      console.log(taylorSwiftUsableQuotes)
+      setRandomQuote("You're killing it! We're all out of quotes.")
+      setIsEndGame(true)
+      setRanOutOfQuotes(true)
     }
   }
 
@@ -196,6 +204,7 @@ function App() {
               isItSwiftOrSpeare={isItSwiftOrSpeare}
               userGuess={userGuess}
               setIsGameStarted={setIsGameStarted}
+              ranOutOfQuotes={ranOutOfQuotes}
             />
           }
         />
