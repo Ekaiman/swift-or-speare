@@ -1,5 +1,5 @@
 import React from 'react'
-import reactRouterDom from 'react-router-dom'
+import { Link }  from 'react-router-dom'
 import './GameScreen.css'
 
 const GameScreen = ({
@@ -8,31 +8,45 @@ const GameScreen = ({
   setDisplayedQuotes,
   swiftOrSpeare,
   setUserGuess,
-  timer
+  timer,
+  isEndGame
 }) => {
   return (
     <div>
-      <p>time left :{timer}</p>
-      <p>{randomQuote}</p>
-      <button
-        className='swift-button'
-        onClick={() => {
-          setDisplayedQuotes(previous => [...previous, randomQuote])
-          swiftOrSpeare()
-          setUserGuess(past => [...past, 'Swift'])
-        }}
-      >
-        Swift
-      </button>
-      <button className='speare-button'
-        onClick={() => {
-          setDisplayedQuotes(previous => [...previous, randomQuote])
-          swiftOrSpeare()
-          setUserGuess(past => [...past, 'Speare'])
-        }}
-      >
-        Speare
-      </button>
+      {isEndGame && (
+        <div>
+          <p>Oops! Lets try again!</p>
+          <Link to='/'>
+          <button>Back to Home</button>
+          </Link>
+        </div>
+      )}
+      {!isEndGame && (
+        <div>
+          <p>time left :{timer}</p>
+          <p>{randomQuote}</p>
+          <button
+            className='swift-button'
+            onClick={() => {
+              setDisplayedQuotes(previous => [...previous, randomQuote])
+              swiftOrSpeare()
+              setUserGuess(past => [...past, 'Swift'])
+            }}
+          >
+            Swift
+          </button>
+          <button
+            className='speare-button'
+            onClick={() => {
+              setDisplayedQuotes(previous => [...previous, randomQuote])
+              swiftOrSpeare()
+              setUserGuess(past => [...past, 'Speare'])
+            }}
+          >
+            Speare
+          </button>
+        </div>
+      )}
     </div>
   )
 }

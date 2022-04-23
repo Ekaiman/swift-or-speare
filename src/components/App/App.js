@@ -6,6 +6,7 @@ import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import GameScreen from '../GameScreen/GameScreen'
 import EndGame from '../End Game/EndGame'
 import shakeSpeareQuotes from '../../shakeSpearData'
+import Error from '../Error/Error'
 
 function App() {
   //>>>>>>>>>>>>STATE<<<<<<<<<<<<<<
@@ -192,6 +193,7 @@ function App() {
               swiftOrSpeare={swiftOrSpeare}
               setUserGuess={setUserGuess}
               timer={timer}
+              isEndGame={isEndGame}
             />
           }
         />
@@ -205,9 +207,11 @@ function App() {
               userGuess={userGuess}
               setIsGameStarted={setIsGameStarted}
               ranOutOfQuotes={ranOutOfQuotes}
+              isEndGame={isEndGame}
             />
           }
         />
+        <Route path='*' element={<Error />}/>
       </Routes>
     </div>
   )
