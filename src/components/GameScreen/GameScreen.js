@@ -17,11 +17,19 @@ const GameScreen = ({
         <div>
           <p>Oops! Lets try again!</p>
           <Link to='/'>
-          <button>Back to Home</button>
+            <button>Back to Home</button>
           </Link>
         </div>
       )}
-      {!isEndGame && (
+      {timer === 30 && (
+        <div>
+          <p>Oops! Lets try again!</p>
+          <Link to='/'>
+            <button>Back to Home</button>
+          </Link>
+        </div>
+      )}
+      {!isEndGame && timer !== 30 && (
         <div>
           <p>time left :{timer}</p>
           <p>{randomQuote}</p>
