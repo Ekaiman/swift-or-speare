@@ -9,7 +9,7 @@ describe('Game flows', () => {
       }
     )
   })
-  
+
   it('Should be able to select 10 second ', () => {
     cy.visit('http://localhost:3000/')
       .get('.1')
@@ -60,5 +60,41 @@ describe('Game flows', () => {
       .click()
       .url()
       .should('eq', 'http://localhost:3000/game-begin')
+  })
+
+  it('should be able to click swift or speare', () => {
+    cy.get('.swift-button').click().get('.speare-button').click()
+  })
+
+  it('should redirect to end game screen when timer is up', () => { 
+
+    cy.wait(10000)
+      .get('.game-over')
+      .contains('Game over!')
+    .get('.home-button')
+  })
+
+  it('should be able to redirect back to home', () => { 
+    cy.get('.home-button')
+      .click()
+      .url()
+      .should('eq', 'http://localhost:3000/')
+    
+  })
+
+  it('should have a back to home button if user visits wrong page without starting game', () => { 
+    cy.visit('http://localhost:3000/game-begin')
+      .get('p')
+      .contains('Oops! You have to start on the home screen!')
+      .get('.home-button')
+      .contains('Back to Home')
+  })
+
+  it('should go back to home when button is clicked', () => { 
+    cy.get('.home-button')
+      .contains('Back to Home')
+      .click()
+      .url()
+      .should('eq', 'http://localhost:3000/')
   })
 })
