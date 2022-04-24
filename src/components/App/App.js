@@ -10,7 +10,6 @@ import Error from '../Error/Error'
 import HomeScreen from '../HomseScreen/HomeScreen'
 
 function App() {
-  //>>>>>>>>>>>>STATE<<<<<<<<<<<<<<
   const [timer, setTimer] = useState(30)
   const [isTimeSelected, setIsTimeSelected] = useState(false)
   const [isEndGame, setIsEndGame] = useState(false)
@@ -27,7 +26,6 @@ function App() {
   const [shakeSpeare, setShakeSpeare] = useState(shakeSpeareQuotes)
   const [ranOutOfQuotes, setRanOutOfQuotes] = useState(false)
 
-  //>>>>>>>USEEFECT>><<<<<<<<<<<<
   useEffect(() => {
     apiCalls
       .fetchData('https://taylorswiftapi.herokuapp.com/get-all?album=fearless')
@@ -89,7 +87,7 @@ function App() {
     }
   }, [isEndGame])
 
-  const swiftOrSpeare = () => {
+  const displaySwiftOrSpeare = () => {
     let swift = getRandomNumber(10)
     let speare = getRandomNumber(10)
     if (taylorSwiftUsableQuotes.length > 0 && speareUsableQuotes.length > 0) {
@@ -127,7 +125,7 @@ function App() {
             <HomeScreen
               setIsTimeSelected={setIsTimeSelected}
               setTimer={setTimer}
-              swiftOrSpeare={swiftOrSpeare}
+              displaySwiftOrSpeare={displaySwiftOrSpeare}
               setIsGameStarted={setIsGameStarted}
               isTimeSelected={isTimeSelected}
             />
@@ -141,7 +139,7 @@ function App() {
               randomQuote={randomQuote}
               isItSwiftOrSpeare={isItSwiftOrSpeare}
               setDisplayedQuotes={setDisplayedQuotes}
-              swiftOrSpeare={swiftOrSpeare}
+              displaySwiftOrSpeare={displaySwiftOrSpeare}
               setUserGuess={setUserGuess}
               timer={timer}
               isEndGame={isEndGame}

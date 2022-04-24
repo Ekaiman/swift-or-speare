@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const HomeScreen = ({ setIsTimeSelected, setTimer, swiftOrSpeare, setIsGameStarted, isTimeSelected }) => {
+const HomeScreen = ({ setIsTimeSelected, setTimer, displaySwiftOrSpeare, setIsGameStarted, isTimeSelected }) => {
   return (
     <div>
       <h3>Select your time</h3>
@@ -48,7 +48,7 @@ const HomeScreen = ({ setIsTimeSelected, setTimer, swiftOrSpeare, setIsGameStart
       <Link to='/game-begin'>
         <button
           onClick={() => {
-            swiftOrSpeare()
+            displaySwiftOrSpeare()
             setIsGameStarted(true)
           }}
           disabled={!isTimeSelected}

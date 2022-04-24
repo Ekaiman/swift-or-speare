@@ -6,7 +6,7 @@ const GameScreen = ({
   randomQuote,
   isItSwiftOrSpeare,
   setDisplayedQuotes,
-  swiftOrSpeare,
+  displaySwiftOrSpeare,
   setUserGuess,
   timer,
   isEndGame
@@ -37,7 +37,7 @@ const GameScreen = ({
             className='swift-button'
             onClick={() => {
               setDisplayedQuotes(previous => [...previous, randomQuote])
-              swiftOrSpeare()
+              displaySwiftOrSpeare()
               setUserGuess(past => [...past, 'Swift'])
             }}
           >
@@ -47,7 +47,7 @@ const GameScreen = ({
             className='speare-button'
             onClick={() => {
               setDisplayedQuotes(previous => [...previous, randomQuote])
-              swiftOrSpeare()
+              displaySwiftOrSpeare()
               setUserGuess(past => [...past, 'Speare'])
             }}
           >
