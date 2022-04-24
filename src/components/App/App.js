@@ -7,6 +7,7 @@ import GameScreen from '../GameScreen/GameScreen'
 import EndGame from '../End Game/EndGame'
 import shakeSpeareQuotes from '../../shakeSpearData'
 import Error from '../Error/Error'
+import HomeScreen from '../HomseScreen/HomeScreen'
 
 function App() {
   //>>>>>>>>>>>>STATE<<<<<<<<<<<<<<
@@ -73,7 +74,6 @@ function App() {
   useEffect(() => {
     if (!isEndGame && isGameStarted) {
       const interval = setInterval(() => {
-        let newTime = timer - +1
         setTimer(previousTime => previousTime - 1)
       }, 1000)
       return () => clearInterval(interval)
@@ -105,7 +105,6 @@ function App() {
         speareUsableQuotes.splice(index, 1)
       }
     } else {
-      console.log(taylorSwiftUsableQuotes)
       setRandomQuote("You're killing it! We're all out of quotes.")
       setIsEndGame(true)
       setRanOutOfQuotes(true)
@@ -125,61 +124,13 @@ function App() {
           exact
           path='/'
           element={
-            <div>
-              <h3>Select your time</h3>
-              <div className='e-btn-group'>
-                <input
-                  type='radio'
-                  id='radioleft'
-                  name='align'
-                  value='left'
-                  onClick={() => {
-                    setIsTimeSelected(true)
-                    setTimer(10)
-                  }}
-                />
-                <label className='e-btn' for='radioleft'>
-                  10 Seconds
-                </label>
-                <input
-                  type='radio'
-                  id='radiomiddle'
-                  name='align'
-                  value='middle'
-                  onClick={() => {
-                    setIsTimeSelected(true)
-                    setTimer(15)
-                  }}
-                />
-                <label className='e-btn' for='radiomiddle'>
-                  15 Seconds
-                </label>
-                <input
-                  type='radio'
-                  id='radioright'
-                  name='align'
-                  value='right'
-                  onClick={() => {
-                    setIsTimeSelected(true)
-                    setTimer(20)
-                  }}
-                />
-                <label className='e-btn' for='radioright'>
-                  20 Seconds
-                </label>
-              </div>
-              <Link to='/game-begin'>
-                <button
-                  onClick={() => {
-                    swiftOrSpeare()
-                    setIsGameStarted(true)
-                  }}
-                  disabled={!isTimeSelected}
-                >
-                  Start Game
-                </button>
-              </Link>
-            </div>
+            <HomeScreen
+              setIsTimeSelected={setIsTimeSelected}
+              setTimer={setTimer}
+              swiftOrSpeare={swiftOrSpeare}
+              setIsGameStarted={setIsGameStarted}
+              isTimeSelected={isTimeSelected}
+            />
           }
         />
         <Route
@@ -211,7 +162,7 @@ function App() {
             />
           }
         />
-        <Route path='*' element={<Error />}/>
+        <Route path='*' element={<Error />} />
       </Routes>
     </div>
   )
