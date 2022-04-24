@@ -3,7 +3,7 @@
 ## Overview
 Swift or Speare is a game where users have a selected amount of time to guess as many quotes as they can. Users are guessing if the quote is Taylor Swift or Shakespeare
 
-![Gif home page](https://media.giphy.com/media/3ucvdJt724vXFOaexJ/giphy.gif)
+![Gif home page](https://media.giphy.com/media/U390a2dJLyTWEJSNFP/giphy.gif)
 
 Quotes are generated at random and once time runs out, users are directed to an end game screen where they can see their score. 
 
