@@ -15,17 +15,17 @@ const GameScreen = ({
     <div>
       {isEndGame && (
         <div>
-          <p>Oops! Lets try again!</p>
+          <p>Oops, you cant go back!</p>
           <Link to='/'>
-            <button>Back to Home</button>
+            <button className='home-button'>Back to Home</button>
           </Link>
         </div>
       )}
       {timer === 30 && (
         <div>
-          <p>Oops! Lets try again!</p>
+          <p>Oops! You have to start on the home screen!</p>
           <Link to='/'>
-            <button>Back to Home</button>
+            <button className='home-button'>Back to Home</button>
           </Link>
         </div>
       )}
