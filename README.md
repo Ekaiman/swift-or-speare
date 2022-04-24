@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Swift or Speare
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+Swift or Speare is a game where users have a selected amount of time to guess as many quotes as they can. Users are guessing if the quote is Taylor Swift or Shakespeare
 
-## Available Scripts
+![Gif home page](https://media.giphy.com/media/3ucvdJt724vXFOaexJ/giphy.gif)
 
-In the project directory, you can run:
+Quotes are generated at random and once time runs out, users are directed to an end game screen where they can see their score. 
 
-### `npm start`
+# Contributors
+- [Emili Kaiman](https://github.com/Ekaiman)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Learning Goals
+- React
+- Router v 6
+- Implementing a timer and redirect at end of timer
+- Testing React components with end-to-end testing
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Technologies Used 
+- React
+- React Router
+- Cypress
+- CSS
 
-### `npm test`
+# Getting Started
+To get a local copy up and running follow these simple steps.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+1. In your terminal, clone the repo
+   ```sh
+   git clone git@github.com:Ekaiman/swift-or-speare.git
+   ```
+2. `cd` into that directory
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Start the server to see the local site
+   ```sh
+   npm start
+   ``` 
+   
+<!-- ## Deployed Site
+After starting both servers, project will run at http://localhost:8080/   -->
+  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Challenges and Wins
+- The biggest challenge in this project was learning how to redirect to a different screen when the timer ran out. I had to self teach react-router-dom@6 to be able to implement this. This was a huge challenge and win!
+- 
+# Future Additions
+- User can save an submit their score to a high score board
+- User can share their score with friends
+- A difficult based quiz, have option to choose easy medium or hard
+- A hint button
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<!-- # Deployment
+Skip installation by using this deployment link to view the application: [Rancid Tomatillos](https://gaping-hammer.surge.sh)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- No installlation is needed  with the provided deploy link.
 
-### `npm run eject`
+- The application was deployed using [Surge](https://surge.sh/). -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
