@@ -25,20 +25,25 @@ const EndGame = ({
     <div>
       {isEndGame ? (
         <div>
-          <h1> Game over!</h1>
+          <h1 className='game-over'> Game over!</h1>
           {ranOutOfQuotes && <p>You're too good! We ran out of quotes.</p>}
           <h3>
             you got {numberCorrect}/{userGuess.length} correct!
           </h3>
           <Link to='/'>
-            <button onClick={() => setIsGameStarted(false)}>Play Again!</button>
+            <button
+              className='home-button'
+              onClick={() => setIsGameStarted(false)}
+            >
+              Play Again!
+            </button>
           </Link>
         </div>
       ) : (
         <div>
           <p>Lets Play!</p>
           <Link to='/'>
-            <button>Home</button>
+            <button className='home-button'npm >Home</button>
           </Link>
         </div>
       )}
