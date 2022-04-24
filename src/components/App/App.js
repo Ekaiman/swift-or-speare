@@ -7,9 +7,9 @@ import GameScreen from '../GameScreen/GameScreen'
 import EndGame from '../End Game/EndGame'
 import shakeSpeareQuotes from '../../shakeSpearData'
 import Error from '../Error/Error'
+import HomeScreen from '../HomseScreen/HomeScreen'
 
 function App() {
-  //>>>>>>>>>>>>STATE<<<<<<<<<<<<<<
   const [timer, setTimer] = useState(30)
   const [isTimeSelected, setIsTimeSelected] = useState(false)
   const [isEndGame, setIsEndGame] = useState(false)
@@ -26,7 +26,6 @@ function App() {
   const [shakeSpeare, setShakeSpeare] = useState(shakeSpeareQuotes)
   const [ranOutOfQuotes, setRanOutOfQuotes] = useState(false)
 
-  //>>>>>>>USEEFECT>><<<<<<<<<<<<
   useEffect(() => {
     apiCalls
       .fetchData('https://taylorswiftapi.herokuapp.com/get-all?album=fearless')
@@ -73,7 +72,6 @@ function App() {
   useEffect(() => {
     if (!isEndGame && isGameStarted) {
       const interval = setInterval(() => {
-        let newTime = timer - +1
         setTimer(previousTime => previousTime - 1)
       }, 1000)
       return () => clearInterval(interval)
@@ -89,7 +87,7 @@ function App() {
     }
   }, [isEndGame])
 
-  const swiftOrSpeare = () => {
+  const displaySwiftOrSpeare = () => {
     let swift = getRandomNumber(10)
     let speare = getRandomNumber(10)
     if (taylorSwiftUsableQuotes.length > 0 && speareUsableQuotes.length > 0) {
@@ -105,7 +103,6 @@ function App() {
         speareUsableQuotes.splice(index, 1)
       }
     } else {
-      console.log(taylorSwiftUsableQuotes)
       setRandomQuote("You're killing it! We're all out of quotes.")
       setIsEndGame(true)
       setRanOutOfQuotes(true)
@@ -125,61 +122,13 @@ function App() {
           exact
           path='/'
           element={
-            <div>
-              <h3>Select your time</h3>
-              <div className='e-btn-group'>
-                <input
-                  type='radio'
-                  id='radioleft'
-                  name='align'
-                  value='left'
-                  onClick={() => {
-                    setIsTimeSelected(true)
-                    setTimer(10)
-                  }}
-                />
-                <label className='e-btn' for='radioleft'>
-                  10 Seconds
-                </label>
-                <input
-                  type='radio'
-                  id='radiomiddle'
-                  name='align'
-                  value='middle'
-                  onClick={() => {
-                    setIsTimeSelected(true)
-                    setTimer(15)
-                  }}
-                />
-                <label className='e-btn' for='radiomiddle'>
-                  15 Seconds
-                </label>
-                <input
-                  type='radio'
-                  id='radioright'
-                  name='align'
-                  value='right'
-                  onClick={() => {
-                    setIsTimeSelected(true)
-                    setTimer(20)
-                  }}
-                />
-                <label className='e-btn' for='radioright'>
-                  20 Seconds
-                </label>
-              </div>
-              <Link to='/game-begin'>
-                <button
-                  onClick={() => {
-                    swiftOrSpeare()
-                    setIsGameStarted(true)
-                  }}
-                  disabled={!isTimeSelected}
-                >
-                  Start Game
-                </button>
-              </Link>
-            </div>
+            <HomeScreen
+              setIsTimeSelected={setIsTimeSelected}
+              setTimer={setTimer}
+              displaySwiftOrSpeare={displaySwiftOrSpeare}
+              setIsGameStarted={setIsGameStarted}
+              isTimeSelected={isTimeSelected}
+            />
           }
         />
         <Route
@@ -190,7 +139,7 @@ function App() {
               randomQuote={randomQuote}
               isItSwiftOrSpeare={isItSwiftOrSpeare}
               setDisplayedQuotes={setDisplayedQuotes}
-              swiftOrSpeare={swiftOrSpeare}
+              displaySwiftOrSpeare={displaySwiftOrSpeare}
               setUserGuess={setUserGuess}
               timer={timer}
               isEndGame={isEndGame}
@@ -211,7 +160,7 @@ function App() {
             />
           }
         />
-        <Route path='*' element={<Error />}/>
+        <Route path='*' element={<Error />} />
       </Routes>
     </div>
   )
