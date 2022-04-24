@@ -47,7 +47,7 @@ After starting both servers, project will run at http://localhost:8080/   -->
 
 # Challenges and Wins
 - The biggest challenge in this project was learning how to redirect to a different screen when the timer ran out. I had to self teach react-router-dom@6 to be able to implement this. This was a huge challenge and win!
-- 
+
 # Future Additions
 - User can save an submit their score to a high score board
 - User can share their score with friends
