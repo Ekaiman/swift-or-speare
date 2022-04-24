@@ -6,6 +6,7 @@ const HomeScreen = ({ setIsTimeSelected, setTimer, displaySwiftOrSpeare, setIsGa
       <h3>Select your time</h3>
       <div className='e-btn-group'>
         <input
+          className='input1'
           type='radio'
           id='radioleft'
           name='align'
@@ -15,10 +16,11 @@ const HomeScreen = ({ setIsTimeSelected, setTimer, displaySwiftOrSpeare, setIsGa
             setTimer(10)
           }}
         />
-        <label className='e-btn' for='radioleft'>
+        <label className='e-btn 1' for='radioleft'>
           10 Seconds
         </label>
         <input
+          className='input2'
           type='radio'
           id='radiomiddle'
           name='align'
@@ -28,10 +30,11 @@ const HomeScreen = ({ setIsTimeSelected, setTimer, displaySwiftOrSpeare, setIsGa
             setTimer(15)
           }}
         />
-        <label className='e-btn' for='radiomiddle'>
+        <label className='e-btn 2' for='radiomiddle'>
           15 Seconds
         </label>
         <input
+          className='input3'
           type='radio'
           id='radioright'
           name='align'
@@ -41,12 +44,13 @@ const HomeScreen = ({ setIsTimeSelected, setTimer, displaySwiftOrSpeare, setIsGa
             setTimer(20)
           }}
         />
-        <label className='e-btn' for='radioright'>
+        <label className='e-btn 3' for='radioright'>
           20 Seconds
         </label>
       </div>
       <Link to='/game-begin'>
         <button
+          className='start-game'
           onClick={() => {
             displaySwiftOrSpeare()
             setIsGameStarted(true)
