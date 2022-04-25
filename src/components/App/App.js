@@ -116,7 +116,7 @@ function App() {
 
   return (
     <div className='App'>
-      <h1 className='App-header'>swift or speare</h1>
+      <h1 className='App-header'>Swift or Speare</h1>
       <Routes>
         <Route
           exact
