@@ -42,7 +42,7 @@ To get a local copy up and running follow these simple steps.
    ``` 
    
 <!-- ## Deployed Site
-After starting both servers, project will run at http://localhost:8080/   -->
+After starting both servers, project will run at http://localhost:3000/
   
 
 # Challenges and Wins
@@ -54,10 +54,10 @@ After starting both servers, project will run at http://localhost:8080/   -->
 - A difficult based quiz, have option to choose easy medium or hard
 - A hint button
 
-<!-- # Deployment
-Skip installation by using this deployment link to view the application: [Rancid Tomatillos](https://gaping-hammer.surge.sh)
+# Deployment
+Skip installation by using this deployment link to view the application: [Swift-or-Speare](https://narrow-achieve.surge.sh/)
 
 - No installlation is needed  with the provided deploy link.
 
-- The application was deployed using [Surge](https://surge.sh/). -->
+- The application was deployed using [Surge](https://surge.sh/).
 
