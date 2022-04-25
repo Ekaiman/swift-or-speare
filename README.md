@@ -41,8 +41,14 @@ To get a local copy up and running follow these simple steps.
    npm start
    ``` 
    
-<!-- ## Deployed Site
 After starting both servers, project will run at http://localhost:3000/
+
+# Deployment
+Skip installation by using this deployment link to view the application: [Swift-or-Speare](https://narrow-achieve.surge.sh/)
+
+- No installlation is needed  with the provided deploy link.
+
+- The application was deployed using [Surge](https://surge.sh/).
   
 
 # Challenges and Wins
@@ -53,11 +59,4 @@ After starting both servers, project will run at http://localhost:3000/
 - User can share their score with friends
 - A difficult based quiz, have option to choose easy medium or hard
 - A hint button
-
-# Deployment
-Skip installation by using this deployment link to view the application: [Swift-or-Speare](https://narrow-achieve.surge.sh/)
-
-- No installlation is needed  with the provided deploy link.
-
-- The application was deployed using [Surge](https://surge.sh/).
 
