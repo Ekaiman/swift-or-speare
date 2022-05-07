@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 const HomeScreen = ({ setIsTimeSelected, setTimer, displaySwiftOrSpeare, setIsGameStarted, isTimeSelected }) => {
   return (
     <div>
-      <h3>Select your time</h3>
+      <h3>Do you know your artists? Test your knowledge! This game will test your proficency in quotes. Can you figure out if its Taylor Swift or Shakespeare? </h3>
+      <h4>Select your time:</h4>
       <div className='e-btn-group'>
         <input
           className='input1'
