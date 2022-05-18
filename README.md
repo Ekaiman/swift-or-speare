@@ -44,7 +44,7 @@ To get a local copy up and running follow these simple steps.
 After starting both servers, project will run at http://localhost:3000/
 
 # Deployment
-Skip installation by using this deployment link to view the application: [Swift-or-Speare](https://narrow-achieve.surge.sh/)
+Skip installation by using this deployment link to view the application: [Swift-or-Speare](https://rare-knife.surge.sh/game-begin)
 
 - No installlation is needed  with the provided deploy link.
 
